@@ -2,7 +2,7 @@ const electron = require('electron');   // electron
 const url = require('url');             // node
 const path = require('path');           // node
 
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, Menu } = electron;
 
 // Declare main window
 let mainWindow;
@@ -16,8 +16,31 @@ app.on('ready', () => {
         protocol: "file:",
         slashes: true
     }));
+
+    // Construct menu from template
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+
+    // set app's main menu
+    Menu.setApplicationMenu(mainMenu);
+
 });
 
-app.on('close', () => {
-
-});
+const mainMenuTemplate = [
+    {
+        label: "File",
+        submenu: [
+            {
+                label: "Submenu 1"
+            },
+            {
+                label: "Submenu 2"
+            }
+        ]
+    },
+    {
+        label: "Menu1"
+    },
+    {
+        label: "Menu2"
+    }
+]
